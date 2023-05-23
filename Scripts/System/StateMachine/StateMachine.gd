@@ -17,7 +17,7 @@ func _register_state(state : State) -> void:
 	_states[state.id] = state
 	var _err_code = state.connect("request_state_change",Callable(self,"_on_request_state_change"))
 	
-func _physics_process(delta) -> void:
+func _process(delta) -> void:
 	if is_instance_valid(active_state):
 		active_state._update_state(delta)
 		active_state._check_exit_paths()
@@ -26,10 +26,14 @@ func _on_request_state_change(old_state: State, new_state: String, forceChange =
 	if (old_state.id == active_state.id or forceChange):
 		if new_state != null && _states.has(new_state):
 			active_state._exit_state()
+			active_state.set_physics_process(false)
 			_previous_state = active_state
+			_previous_state.state_is_active = false
 			active_state = _states[new_state]
 			active_state._enter_state()
+			active_state.set_physics_process(true)
 			var _err_code = emit_signal("state_changed", old_state, active_state)
+			active_state.state_is_active = true
 
 func _set_initial_state():
 	var state = get_node(initial_state_path)

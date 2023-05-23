@@ -7,6 +7,8 @@ signal request_state_change(source, new_state)
 #@warning_ignore(unused_private_class_variable)
 @onready var _parent = get_parent()
 
+var state_is_active : bool = false
+
 var _state_paths = {}
 var id : String
 

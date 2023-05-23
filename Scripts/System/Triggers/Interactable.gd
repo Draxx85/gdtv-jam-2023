@@ -1,4 +1,3 @@
-@tool
 extends Area3D
 
 @export var data : Resource

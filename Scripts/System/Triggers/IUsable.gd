@@ -12,5 +12,5 @@ var data : Resource :
 func use() -> void:
 	pass
 
-func _set_data(value):
+func _set_data(_value):
 	pass

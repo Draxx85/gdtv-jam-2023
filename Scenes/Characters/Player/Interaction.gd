@@ -16,6 +16,6 @@ func _on_possible_interactable_entered(area):
 	target = area
 
 
-func _on_area_exited(area):
+func _on_area_exited(_area):
 	print("out of range")
 	target = null
