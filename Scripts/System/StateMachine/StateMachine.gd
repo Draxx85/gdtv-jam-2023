@@ -1,5 +1,5 @@
 class_name StateMachine
-extends Node2D
+extends Node
 
 @export var initial_state_path : NodePath
 

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="InteractableData" load_steps=5 format=3 uid="uid://25jhxlms2gt2"]
+
+[ext_resource type="Script" path="res://Scripts/System/Data/Interactables/InteractableData.gd" id="1_pq26s"]
+[ext_resource type="Script" path="res://Data/Interactables/Use_UsableBox.gd" id="1_y8nks"]
+[ext_resource type="Resource" uid="uid://b1bxdm6vp4pap" path="res://Data/Interactables/UsableBox_UseData.tres" id="3_eojga"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gsqil"]
+
+[resource]
+script = ExtResource("1_pq26s")
+collision_shape = SubResource("BoxShape3D_gsqil")
+on_use = ExtResource("1_y8nks")
+use_data = ExtResource("3_eojga")

@@ -5,4 +5,5 @@ class_name SceneData
 
 func traverse_scene():
 	if (scene):
-		GameManager.load_level(scene)
+		pass
+		#GameManager.load_level(scene)

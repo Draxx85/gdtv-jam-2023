@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://b1bxdm6vp4pap"]
+
+[ext_resource type="Material" uid="uid://bax8edo4ssria" path="res://Art/Materials/UsableBoxMat.tres" id="1_25ad3"]
+[ext_resource type="Script" path="res://Data/Interactables/UsableBox_UseData.gd" id="1_n0dp6"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_n0dp6")
+material = ExtResource("1_25ad3")
+metadata/_editor_prop_ptr_box_mesh = NodePath("Geo")
+metadata/_editor_prop_ptr_mesh = NodePath("Geo")

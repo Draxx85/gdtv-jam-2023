@@ -1,0 +1,102 @@
+[gd_scene load_steps=17 format=3 uid="uid://bac5vl5l130wt"]
+
+[ext_resource type="PackedScene" uid="uid://bj88fug1a0htk" path="res://Scenes/Characters/Player/Player.tscn" id="1_y6bod"]
+[ext_resource type="PackedScene" uid="uid://di631w6wju704" path="res://Scenes/Characters/Player/CameraController.tscn" id="2_ar50q"]
+[ext_resource type="Texture2D" uid="uid://dteh4gqn5e3k3" path="res://Art/TempTextures/FLOOR_2E.png" id="3_dc65u"]
+[ext_resource type="Texture2D" uid="uid://cug78jfmjo4fv" path="res://Art/TempTextures/CONCRETE_3C.png" id="4_agkbi"]
+[ext_resource type="Texture2D" uid="uid://dkdcnknbyd0ru" path="res://Art/TempTextures/CONCRETE_1A.png" id="4_ox4ll"]
+[ext_resource type="Script" path="res://Scripts/System/Triggers/Interactable.gd" id="6_niu4j"]
+[ext_resource type="Resource" uid="uid://25jhxlms2gt2" path="res://Data/Interactables/UsuableBox.tres" id="7_hesh7"]
+[ext_resource type="Material" uid="uid://bax8edo4ssria" path="res://Art/Materials/UsableBoxMat.tres" id="8_5xhn8"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_d6qd7"]
+sky_top_color = Color(0.0117647, 0.0392157, 0.690196, 1)
+sky_horizon_color = Color(0.756863, 0.266667, 0.0156863, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_7l3m4"]
+sky_material = SubResource("ProceduralSkyMaterial_d6qd7")
+
+[sub_resource type="Environment" id="Environment_tdbyk"]
+background_mode = 2
+sky = SubResource("Sky_7l3m4")
+ambient_light_source = 3
+ambient_light_color = Color(0.745098, 0.686275, 0.901961, 1)
+reflected_light_source = 2
+tonemap_mode = 3
+glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.1
+volumetric_fog_albedo = Color(0.796078, 0.784314, 0.690196, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_okycr"]
+albedo_texture = ExtResource("3_dc65u")
+uv1_scale = Vector3(8, 100, 2.22)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i1enk"]
+albedo_texture = ExtResource("4_ox4ll")
+uv1_scale = Vector3(15, 100, 0.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7gaxd"]
+albedo_texture = ExtResource("4_agkbi")
+uv1_scale = Vector3(100, 25, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_polmd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gsqil"]
+
+[node name="TestLevel" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_tdbyk")
+
+[node name="CameraController" parent="." node_paths=PackedStringArray("target") instance=ExtResource("2_ar50q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 4)
+target = NodePath("../Player")
+camera_speed = 3.0
+
+[node name="Player" parent="." instance=ExtResource("1_y6bod")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49596, -9.148)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.812861, 0.547677, -0.198261, -0.371534, 0.749686, 0.547662, 0.448576, -0.371512, 0.812871, 0, 18.0777, 28.8145)
+
+[node name="Street" type="Node3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Street"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+material_override = SubResource("StandardMaterial3D_okycr")
+snap = 1.0
+use_collision = true
+size = Vector3(100, 1, 5)
+metadata/_edit_lock_ = true
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Street"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.317354, 0)
+material_override = SubResource("StandardMaterial3D_i1enk")
+snap = 1.0
+use_collision = true
+size = Vector3(100, 0.25, 15)
+metadata/_edit_lock_ = true
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Street"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, -13)
+material_override = SubResource("StandardMaterial3D_7gaxd")
+snap = 1.0
+size = Vector3(100, 25, 1)
+metadata/_edit_lock_ = true
+
+[node name="Interactables" type="Node3D" parent="."]
+
+[node name="UsuableBox" type="Area3D" parent="Interactables"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.2422, 1, -11.6963)
+script = ExtResource("6_niu4j")
+data = ExtResource("7_hesh7")
+
+[node name="Geo" type="MeshInstance3D" parent="Interactables/UsuableBox"]
+mesh = SubResource("BoxMesh_polmd")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("8_5xhn8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactables/UsuableBox"]
+shape = SubResource("BoxShape3D_gsqil")
