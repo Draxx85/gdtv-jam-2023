@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bac5vl5l130wt"]
+[gd_scene load_steps=19 format=3 uid="uid://bac5vl5l130wt"]
 
 [ext_resource type="PackedScene" uid="uid://bj88fug1a0htk" path="res://Scenes/Characters/Player/Player.tscn" id="1_y6bod"]
 [ext_resource type="PackedScene" uid="uid://di631w6wju704" path="res://Scenes/Characters/Player/CameraController.tscn" id="2_ar50q"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" path="res://Scripts/System/Triggers/Interactable.gd" id="6_niu4j"]
 [ext_resource type="Resource" uid="uid://25jhxlms2gt2" path="res://Data/Interactables/UsuableBox.tres" id="7_hesh7"]
 [ext_resource type="Material" uid="uid://bax8edo4ssria" path="res://Art/Materials/UsableBoxMat.tres" id="8_5xhn8"]
+[ext_resource type="Script" path="res://Scripts/System/OnScreenChecker.gd" id="9_f8rnv"]
+[ext_resource type="PackedScene" uid="uid://1bjd741vtjnv" path="res://Scenes/cartoon_shader.tscn" id="10_58o7i"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_d6qd7"]
 sky_top_color = Color(0.0117647, 0.0392157, 0.690196, 1)
@@ -83,8 +85,16 @@ metadata/_edit_lock_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, -13)
 material_override = SubResource("StandardMaterial3D_7gaxd")
 snap = 1.0
+use_collision = true
 size = Vector3(100, 25, 1)
 metadata/_edit_lock_ = true
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Street"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.9173, 8.03977)
+visible = false
+snap = 1.0
+use_collision = true
+size = Vector3(100, 25, 1)
 
 [node name="Interactables" type="Node3D" parent="."]
 
@@ -94,9 +104,20 @@ script = ExtResource("6_niu4j")
 data = ExtResource("7_hesh7")
 
 [node name="Geo" type="MeshInstance3D" parent="Interactables/UsuableBox"]
+layers = 2
 mesh = SubResource("BoxMesh_polmd")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("8_5xhn8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactables/UsuableBox"]
 shape = SubResource("BoxShape3D_gsqil")
+
+[node name="OnScreenChecker" type="VisibleOnScreenNotifier3D" parent="Interactables/UsuableBox" node_paths=PackedStringArray("interactable")]
+aabb = AABB(-0.499373, -0.498714, -0.500109, 0.998746, 0.997429, 1.00022)
+script = ExtResource("9_f8rnv")
+interactable = NodePath("..")
+
+[node name="CartoonShader" parent="." instance=ExtResource("10_58o7i")]
+
+[connection signal="screen_entered" from="Interactables/UsuableBox/OnScreenChecker" to="Interactables/UsuableBox/OnScreenChecker" method="_on_screen_entered"]
+[connection signal="screen_exited" from="Interactables/UsuableBox/OnScreenChecker" to="Interactables/UsuableBox/OnScreenChecker" method="_on_screen_exited"]

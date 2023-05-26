@@ -1,0 +1,113 @@
+[gd_scene load_steps=7 format=3 uid="uid://web14442yyfq"]
+
+[ext_resource type="Script" path="res://Scenes/UI/CameraHUD.gd" id="1_gywqt"]
+[ext_resource type="Texture2D" uid="uid://5jxr35bie4a1" path="res://Art/UI/ScifiPack/010.png" id="1_vejcn"]
+[ext_resource type="Texture2D" uid="uid://govne8anhj0p" path="res://Art/UI/ScifiPack/052.png" id="2_acowf"]
+[ext_resource type="Texture2D" uid="uid://bajm8jw6dpw3p" path="res://Art/UI/ScifiPack/101.png" id="3_hkvb6"]
+[ext_resource type="Texture2D" uid="uid://cjjgdicfp7ekm" path="res://Art/UI/ScifiPack/011.png" id="4_jn8uu"]
+[ext_resource type="Texture2D" uid="uid://b13n50r4n3oaw" path="res://Art/UI/ScifiPack/038.png" id="5_lflyu"]
+
+[node name="Camera UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gywqt")
+
+[node name="Visibility Layer" type="CanvasLayer" parent="."]
+
+[node name="Control Indicator" type="Control" parent="Visibility Layer"]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -292.0
+offset_top = -292.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Texture" type="TextureRect" parent="Visibility Layer/Control Indicator"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_vejcn")
+
+[node name="Boarder" type="Control" parent="Visibility Layer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Visibility Layer/Boarder"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -1.0
+offset_right = 2.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_acowf")
+region_rect = Rect2(0, 0, 104, 104)
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 31
+patch_margin_bottom = 32
+
+[node name="TextureRect" type="TextureRect" parent="Visibility Layer/Boarder/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.5
+offset_top = -44.0
+offset_right = 44.5
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_hkvb6")
+
+[node name="CameraZoomReticle" type="TextureRect" parent="Visibility Layer/Boarder/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -93.0
+offset_top = -93.0
+offset_right = 93.0
+offset_bottom = 93.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(93, 93)
+texture = ExtResource("4_jn8uu")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Visibility Layer/Boarder"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 21.0
+offset_right = 154.0
+offset_bottom = 155.0
+max_value = 9.0
+fill_mode = 3
+texture_progress = ExtResource("5_lflyu")

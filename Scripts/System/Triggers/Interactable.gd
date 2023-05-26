@@ -20,3 +20,6 @@ func use():
 #			audio_player.play()
 		if is_instance_valid(interaction):
 			interaction.use()
+
+func _on_on_screen_checker_screen_entered():
+	pass # Replace with function body.
