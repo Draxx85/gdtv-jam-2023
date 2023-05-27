@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6o85yl21vtjf"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5452a"]
+font_size = 64
+
+[node name="PhotoScreen" type="Control"]
+process_mode = 2
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.329412, 0, 0.803922)
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -112.5
+offset_top = 64.0
+offset_right = 112.5
+offset_bottom = 155.0
+grow_horizontal = 2
+text = "Photo Screen"
+label_settings = SubResource("LabelSettings_5452a")
+horizontal_alignment = 1

@@ -8,6 +8,7 @@ extends State
 @onready var gimbal_h := $Gimbal
 @onready var cam_ui := $Gimbal/Camera/CamUI
 @onready var texture_rect : TextureRect = $Gimbal/Camera/CamUI/TextureRect
+@onready var player : Player = $"../.."
 
 signal camera_zoom_changed(zoom : float)
 
